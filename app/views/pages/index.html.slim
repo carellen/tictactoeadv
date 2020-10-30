@@ -1,2 +1,37 @@
-a href='#' data-reflex='click->CounterReflex#increment' data-step='1' data-count=@count.to_i
- | Increment #{ @count.to_i}
+/ .grid.grid-rows-12.grid-cols-12.grid-flow-col.gap-4
+/   .row-span-2.col-span-2.bg-gray.border.border-purple
+/   .row-span-2.col-span-8.bg-gray.border.border-purple
+/   .row-span-2.col-span-2.bg-gray.border.border-purple
+  / .row-span-8.col-span-2.bg-gray.border.border-purple
+  / .row-span-8.col-span-8.bg-gray.border.border-purple
+  / .row-span-8.col-span-2.bg-gray.border.border-purple
+  / .row-span-2.col-span-2.bg-gray.border.border-purple
+  / .row-span-2.col-span-8.bg-gray.border.border-purple
+  / .row-span-2.col-span-2.bg-gray.border.border-purple
+/ button[
+/   data-reflex='click->CounterReflex#increment'
+/   data-step='1'
+/   data-count=@count.to_i
+/   class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white"
+/ ] Increment
+/ p
+/   = @count.to_i
+div.z-0.m-1.h-screen.grid.grid-rows-5.grid-cols-5.gap-1
+  div.bg-gray-100.rounded-sm.col-start-1.col-end-2.row-start-1.row-end-2.transition.duration-500.ease-in-out.transform class='hover:z-10 hover:border-4 hover:border-gray-300 hover:translate-x-3  hover:translate-y-3 hover:scale-125'
+    | 1
+  div.bg-gray-100.rounded-sm.col-start-2.col-end-5.row-start-1.row-end-2.transition.duration-500.ease-in-out.transform class='hover:z-10 hover:border-4 hover:border-gray-300 hover:translate-y-3 hover:scale-125'
+    | 2
+  div.bg-gray-100.rounded-sm.col-start-5.col-end-6.row-start-1.row-end-2.transition.duration-500.ease-in-out.transform class='hover:z-10 hover:border-4 hover:border-gray-300 hover:-translate-x-3  hover:translate-y-3 hover:scale-125'
+    | 3
+  div.bg-gray-100.rounded-sm.col-start-1.col-end-2.row-start-2.row-end-5.transition.duration-500.ease-in-out.transform class='hover:z-10 hover:border-4 hover:border-gray-300 hover:translate-x-3 hover:scale-125'
+    | 4
+  div.bg-gray-100.rounded-sm.col-start-2.col-end-5.row-start-2.row-end-5.transition.duration-500.ease-in-out.transform class='hover:z-10 hover:border-4 hover:border-gray-300 hover:scale-125'
+    | 5
+  div.bg-gray-100.rounded-sm.col-start-5.col-end-6.row-start-2.row-end-5.transition.duration-500.ease-in-out.transform class='hover:z-10 hover:border-4 hover:border-gray-300 hover:-translate-x-3 hover:scale-125'
+    | 6
+  div.bg-gray-100.rounded-sm.col-start-1.col-end-2.row-start-5.row-end-6.transition.duration-500.ease-in-out.transform class='hover:z-10 hover:border-4 hover:border-gray-300 hover:translate-x-3  hover:-translate-y-3 hover:scale-125'
+    | 7
+  div.bg-gray-100.rounded-sm.col-start-2.col-end-5.row-start-5.row-end-6.transition.duration-500.ease-in-out.transform class='hover:z-10 hover:border-4 hover:border-gray-300 hover:-translate-y-3 hover:scale-125'
+    | 8
+  div.bg-gray-100.rounded-sm.col-start-5.col-end-6.row-start-5.row-end-6.transition.duration-500.ease-in-out.transform class='hover:z-10 hover:border-4 hover:border-gray-300 hover:-translate-x-3  hover:-translate-y-3 hover:scale-125'
+    | 9
