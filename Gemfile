@@ -60,3 +60,5 @@ gem 'futurism'
 gem 'slim-rails'
 
 gem 'html2slim'
+
+gem 'devise'

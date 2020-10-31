@@ -1,0 +1,57 @@
+- if errors
+  .flex.flex-wrap.h-full.items-center
+    .text-center.w-full.text-red-600
+      | Hey, something went wrong!
+    .text-center.w-full.text-red-600
+      = errors
+- elsif user
+  = form_with(model: @current_user, url: destroy_session_path(user), html: {role: 'form', class: 'h-full', attr: 'data-reflex-permanent', method: :delete}, data: { type: :json, reflex: 'ajax:success->Login#logout' }) do |f|
+    .flex.flex-wrap.h-full.items-center
+      .flex.flex-row.justify-around.w-full
+        .self-center
+          | Hello,
+          | &nbsp;
+          = user.name
+          | !
+      .flex.flex-row.justify-center.w-full
+        .self-center
+          = f.submit 'logout', class: 'px-2 py-1 rounded-sm bg-blue-300'
+- elsif login
+  = form_with(model: User.new, url: session_path(:user), html: {role: 'form', class: 'h-full'}, data: { type: :json, action: 'ajax:success->login#success ajax:error->login#failure' }) do |f|
+    .flex.flex-wrap.h-full.items-center
+      .flex.flex-row.justify-around.w-full
+        .self-center
+          = f.text_field :email, placeholder: 'email', id: 'header_user_email', class: ''
+        .self-center
+          = f.password_field :password, placeholder: 'password', id: 'header_user_password', class: ''
+      .flex.flex-row.justify-center.w-full
+        .self-center
+          = f.submit 'login', class: 'px-2 py-1 rounded-sm bg-green-300'
+      .flex.flex-row.justify-around.w-full
+        .self-center
+          | Not registered yet?
+          | &nbsp;
+          a.text-blue-500 href='#' data-reflex='click->Login#toggle' data-login=login
+            | Sing up!
+- else
+  = form_with(model: User.new, url: registration_path(:user), html: {role: 'form', class: 'h-full'}, data: { type: :json, action: 'ajax:success->login#success ajax:error->login#failure' }) do |f|
+    .flex.flex-wrap.h-full.items-center
+      .flex.flex-row.justify-around.w-full
+        .self-center
+          = f.email_field :email, autofocus: true, placeholder: 'email'
+        .self-center
+          = f.text_field :name, placeholder: 'name'
+      .flex.flex-row.justify-around.w-full
+        .self-center
+          = f.password_field :password, autocomplete: 'off', placeholder: 'password'
+        .self-center
+          = f.password_field :password_confirmation, autocomplete: 'off', placeholder: 'password confirmation'
+      .flex.flex-row.justify-center.w-full
+        .self-center
+          = f.submit 'Sign up', class: 'px-2 py-1 rounded-sm bg-green-300'
+      .flex.flex-row.justify-center.w-full
+        .self-center
+          | Already have login?
+          | &nbsp;
+          a.text-blue-500 href='#' data-reflex='click->Login#toggle' data-login=login
+            | Sing in!

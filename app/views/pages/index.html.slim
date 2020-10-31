@@ -1,2 +1,19 @@
-a href='#' data-reflex='click->CounterReflex#increment' data-step='1' data-count=@count.to_i
- | Increment #{ @count.to_i}
+div.z-0.m-1.h-screen.grid.grid-rows-5.grid-cols-5.gap-1
+  div.bg-gray-100.rounded-sm.col-start-1.col-end-2.row-start-1.row-end-2
+    | 1
+  #login.bg-gray-100.rounded-sm.col-start-2.col-end-5.row-start-1.row-end-2 data-controller='login' data-reflex-root='#login'
+    = render 'login', login: @login, user: @user, errors: @errors
+  div.bg-gray-100.rounded-sm.col-start-5.col-end-6.row-start-1.row-end-2
+    | 3
+  div.bg-gray-100.rounded-sm.col-start-1.col-end-2.row-start-2.row-end-5
+    | 4
+  div.bg-gray-100.rounded-sm.col-start-2.col-end-5.row-start-2.row-end-5
+    | 5
+  div.bg-gray-100.rounded-sm.col-start-5.col-end-6.row-start-2.row-end-5
+    | 6
+  div.bg-gray-100.rounded-sm.col-start-1.col-end-2.row-start-5.row-end-6
+    | 7
+  div.bg-gray-100.rounded-sm.col-start-2.col-end-5.row-start-5.row-end-6
+    | 8
+  div.bg-gray-100.rounded-sm.col-start-5.col-end-6.row-start-5.row-end-6
+    | 9
