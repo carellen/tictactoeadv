@@ -1,0 +1,13 @@
+table#rating.table-fixed
+  thead
+    tr
+      th.px-4.py-2.text-left class='w-3/4' Player
+      th.px-4.py-2 class='w-1/4' Rating
+  tbody
+
+  - @players.each_with_index do |player, i|
+    tr id='player-#{player.id}'
+      td.border.px-4.py-2
+        = player.name
+      td.text-center.border.px-4.py-2
+        = player.rating

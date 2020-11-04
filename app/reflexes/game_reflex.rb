@@ -27,6 +27,8 @@ class GameReflex < StimulusReflex::Reflex
     morph :nothing
     game = Game.find(element.dataset[:id])
 
+    return if Rails.cache.fetch("game:#{user_id}:active") == game
+
     if game.in_progress?
       cable_ready[GameChannel].morph(selector: '#field', html: ApplicationController.render(FieldComponent.new(game: game)))
       cable_ready.broadcast_to(game)
@@ -117,7 +119,7 @@ class GameReflex < StimulusReflex::Reflex
   def add_second_player(game)
     if current_user.is_a? User
       game.players << current_user
-      game.matches.pluck(:mark, :user_id).each do |mark, user_id|
+      game.matchups.pluck(:mark, :user_id).each do |mark, user_id|
         Rails.cache.write("game:#{game.id}:#{mark}_player", user_id)
       end
     else
@@ -167,15 +169,21 @@ class GameReflex < StimulusReflex::Reflex
   def finish_game(game, winner)
     morph :nothing
     if game.rating
-      game.update(status: :finished, winner: winner, turns: Rails.cache.fetch("game:#{game.id}:turns"))
+      game.update(status: :finished, winner: winner && current_user, turns: Rails.cache.fetch("game:#{game.id}:turns"))
       if winner
         current_user.update(rating: current_user.rating + 2)
       else
         %w(x o).each do |mark|
           id = Rails.cache.fetch("game:#{game.id}:#{mark}_player")
-          User.find(id).update(rating: current_user.rating + 1)
+          user = User.find(id)
+          user.update(rating: user.rating + 1)
         end
       end
+      cable_ready['rating'].morph(
+        selector: '#rating',
+        html: ApplicationController.render(RatingComponent.new)
+      )
+      cable_ready.broadcast
     end
 
     cable_ready[GameChannel].morph(

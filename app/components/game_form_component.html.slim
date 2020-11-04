@@ -9,7 +9,7 @@
       .flex.flex-wrap.h-full.items-center
         .flex.flex-row.justify-around.w-full
           .self-center
-            = text_field_tag :title, nil, autofocus: true, placeholder: 'title'
+            = text_field_tag :title, nil, autofocus: true, placeholder: 'title', maxLength: 15, required: true, class: 'p-1'
           .self-center
             = label_tag :size, nil, class: 'text-center mr-2'
             = number_field_tag :size, 5, in: 5..20, data: { reflex: 'change->Game#adjust_preview' }

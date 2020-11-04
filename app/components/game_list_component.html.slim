@@ -17,7 +17,7 @@ table#gameList.table-fixed
   tbody
 
   - @games.each_with_index do |game, i|
-    tr.cursor-pointer id='game-#{game.id}' class='#{'pointer-events-none opacity-50' if game.rating && current_user.blank?}' data-action='click->game#join' data-id=game.id
+    tr.cursor-pointer id='game-#{game.id}' data-action='click->game#join' data-id=game.id
       td.border.px-4.py-2
         = game.title
       td.border.px-4.py-2
