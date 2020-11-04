@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def index
+    # TODO: implement restore game after reload
     # @game = current_game
   end
 
