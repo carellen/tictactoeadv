@@ -1,0 +1,38 @@
+table#gameList.table-fixed
+  thead
+    tr
+      th.px-4.py-2 class='w-1/2' Title
+      th.tooltip.px-4.py-2 class='w-1/6'
+        | S
+        span.tooltip-text.bg-blue-200.p-3.-mt-10.-ml-16.rounded
+          | Game status
+      th.tooltip.px-4.py-2 class='w-1/6'
+        | R
+        span.tooltip-text.bg-blue-200.p-3.-mt-10.-ml-16.rounded
+          | Rating game
+      th.tooltip.px-4.py-2 class='w-1/6'
+        | D
+        span.tooltip-text.bg-blue-200.p-3.-mt-16.-ml-24.rounded
+          | Field dimensions
+  tbody
+
+  - @games.each_with_index do |game, i|
+    tr.cursor-pointer id='game-#{game.id}' data-action='click->game#join' data-id=game.id
+      td.border.px-4.py-2
+        = game.title
+      td.border.px-4.py-2
+        - if game.in_progress?
+          .tooltip
+            | &#9876;
+            span.tooltip-text.bg-blue-200.p-3.-mt-8.-ml-20.rounded
+              | Game in progress
+        - else
+          .tooltip
+            | &#8987;
+            span.tooltip-text.bg-blue-200.p-3.-mt-8.-ml-20.rounded
+              | Waiting for opponent
+      td.border.px-4.py-2
+        - if game.rating
+          | &check;
+      td.border.px-4.py-2
+        | #{game.size}x#{game.size}

@@ -1,7 +1,12 @@
 class PagesController < ApplicationController
   def index
-    @user = current_user
-    @errors ||= nil
-    @login ||= true
+    # TODO: implement restore game after reload
+    # @game = current_game
+  end
+
+  private
+
+  def current_game
+    (current_user && current_user.games.active.last) || Rails.cache.fetch("game:#{session.id}:active")
   end
 end
