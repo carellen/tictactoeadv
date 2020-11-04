@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+  postgres:
+    image: 'postgres:9.6.11-alpine'
+    environment:
+      POSTGRES_USER: 'carellen'
+      POSTGRES_PASSWORD: 'pcEmmV3EN4'
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  redis:
+    image: 'redis:4.0.11-alpine'
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - '6379:6379'
+    sysctls:
+      # https://github.com/docker-library/redis/issues/35
+      net.core.somaxconn: '511'
+
+  app:
+    depends_on:
+      - 'postgres'
+      - 'redis'
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    ports:
+      - '3000:3000'
+    env_file:
+      - '.env'
+
+  web:
+    depends_on:
+      - 'app'
+    build:
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+    ports:
+      - '80:80'
+    env_file:
+      - '.env'
+
+  sidekiq:
+    depends_on:
+      - 'postgres'
+      - 'redis'
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    command: sidekiq -C config/sidekiq.yml.erb
+    env_file:
+      - '.env'
+
+#  cable:
+#    depends_on:
+#      - 'redis'
+#    build:
+#      context: .
+#      dockerfile: ./docker/app/Dockerfile
+#    command: puma -p 28080 cable/config.ru
+#    ports:
+#      - '28080:28080'
+#    env_file:
+#      - '.env'
+
+volumes:
+  app:
+  redis:
+  postgres:
+  web:
+  esdata:
