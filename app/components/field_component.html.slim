@@ -1,0 +1,21 @@
+#field.flex.justify-center.h-full
+
+  - if @game && @game.waiting_opponent?
+    .flex.flex-col.self-center
+      .self-center
+        .timer-loader
+
+  - elsif @game && @game.in_progress?
+    - @game.cells.each do |row|
+      .self-center
+        = render(CellComponent.with_collection(row, game: @game.id, size: @game.cell_size))
+
+  - elsif @cells
+    - @cells.each do |row|
+      .self-center
+        - row.each do |cell|
+          .flex.border.border-black.justify-center class='h-#{@size} w-#{@size}'
+            .self-center
+  - else
+    .self-center
+      | Create game or join existing

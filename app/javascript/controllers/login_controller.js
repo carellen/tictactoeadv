@@ -1,5 +1,6 @@
 import { Controller } from 'stimulus'
 import StimulusReflex from 'stimulus_reflex'
+import consumer from '../channels/consumer'
 
 export default class extends Controller {
   static targets = [ 'error' ]
@@ -11,8 +12,10 @@ export default class extends Controller {
   success() {
     const [data, status, xhr] = event.detail
 
-    this.stimulate("Login#success", data)
-    console.log('Success!')
+    this.stimulate("Login#success", data).then(_ => {
+      console.log('Login#success!')
+      consumer.connection.close()
+    })
   }
 
   failure() {
@@ -24,6 +27,12 @@ export default class extends Controller {
     } catch (e) {
       console.log(e)
     }
+  }
 
+  logout() {
+    this.stimulate("Login#logout").then(_ => {
+      console.log('Logout#success!')
+      consumer.connection.close()
+    })
   }
 }

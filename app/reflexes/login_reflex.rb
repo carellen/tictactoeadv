@@ -12,11 +12,12 @@ class LoginReflex < StimulusReflex::Reflex
   end
 
   def success(user)
+    current_user = User.find(user[:id])
     morph '#login', ApplicationController.render(
       partial: 'pages/login',
       locals: {
         login: element.dataset[:login],
-        user: User.find(user[:id]),
+        user: current_user,
         errors: nil,
       }
     )
@@ -27,6 +28,13 @@ class LoginReflex < StimulusReflex::Reflex
   end
 
   def logout
-    @user = nil
+    morph '#login', ApplicationController.render(
+      partial: 'pages/login',
+      locals: {
+        login: element.dataset[:login],
+        user: nil,
+        errors: nil,
+      }
+    )
   end
 end

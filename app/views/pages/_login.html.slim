@@ -5,7 +5,7 @@
     .text-center.w-full.text-red-600
       = errors
 - elsif user
-  = form_with(model: @current_user, url: destroy_session_path(user), html: {role: 'form', class: 'h-full', attr: 'data-reflex-permanent', method: :delete}, data: { type: :json, reflex: 'ajax:success->Login#logout' }) do |f|
+  = form_with(model: @current_user, url: destroy_session_path(user), html: {role: 'form', class: 'h-full', attr: 'data-reflex-permanent', method: :delete}, data: { type: :json, action: 'ajax:success->login#logout' }) do |f|
     .flex.flex-wrap.h-full.items-center
       .flex.flex-row.justify-around.w-full
         .self-center

@@ -1,0 +1,18 @@
+#gameForm.flex.h-full.justify-center
+  - if @game_id
+    #gameInfo.flex.flex-wrap.h-full.items-center data-target='game.current' data-id=@game_id
+      .flex.flex-row.justify-around.w-full
+        #message.self-center
+          = @message
+  - else
+    = form_tag('/', id: 'gameFormId', role: 'form', class: 'h-full', data: { remote: true, action: 'submit->game#create'})
+      .flex.flex-wrap.h-full.items-center
+        .flex.flex-row.justify-around.w-full
+          .self-center
+            = text_field_tag :title, nil, autofocus: true, placeholder: 'title'
+          .self-center
+            = label_tag :size, nil, class: 'text-center mr-2'
+            = number_field_tag :size, 5, in: 5..20, data: { reflex: 'change->Game#adjust_preview' }
+        .flex.flex-row.justify-center.w-full
+          .self-center
+            = submit_tag 'Create new game', class: 'px-2 py-1 rounded-sm bg-green-300'

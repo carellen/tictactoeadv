@@ -1,19 +1,19 @@
-div.z-0.m-1.h-screen.grid.grid-rows-5.grid-cols-5.gap-1
+.z-0.m-1.h-screen.grid.grid-rows-5.grid-cols-5.gap-1 data-controller='game login'
   div.bg-gray-100.rounded-sm.col-start-1.col-end-2.row-start-1.row-end-2
     | 1
-  #login.bg-gray-100.rounded-sm.col-start-2.col-end-5.row-start-1.row-end-2 data-controller='login' data-reflex-root='#login'
+  #login.bg-gray-100.rounded-sm.col-start-2.col-end-5.row-start-1.row-end-2 data-reflex-root='#login'
     = render 'login', login: @login, user: @user, errors: @errors
   div.bg-gray-100.rounded-sm.col-start-5.col-end-6.row-start-1.row-end-2
     | 3
   div.bg-gray-100.rounded-sm.col-start-1.col-end-2.row-start-2.row-end-5
     | 4
   div.bg-gray-100.rounded-sm.col-start-2.col-end-5.row-start-2.row-end-5
-    | 5
-  div.bg-gray-100.rounded-sm.col-start-5.col-end-6.row-start-2.row-end-5
-    | 6
+    = render(FieldComponent.new(game: @game))
+  .h-full.overflow-y-scroll.bg-gray-100.rounded-sm.col-start-5.col-end-6.row-start-2.row-end-5
+    = render(GameListComponent.new)
   div.bg-gray-100.rounded-sm.col-start-1.col-end-2.row-start-5.row-end-6
     | 7
   div.bg-gray-100.rounded-sm.col-start-2.col-end-5.row-start-5.row-end-6
-    | 8
+    = render(GameFormComponent.new(game_id: @game&.id))
   div.bg-gray-100.rounded-sm.col-start-5.col-end-6.row-start-5.row-end-6
-    | 9
+    = render(GameComponent.new)
