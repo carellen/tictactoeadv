@@ -43,17 +43,6 @@ services:
     env_file:
       - '.env'
 
-  sidekiq:
-    depends_on:
-      - 'postgres'
-      - 'redis'
-    build:
-      context: .
-      dockerfile: ./docker/app/Dockerfile
-    command: sidekiq -C config/sidekiq.yml.erb
-    env_file:
-      - '.env'
-
 #  cable:
 #    depends_on:
 #      - 'redis'
@@ -71,4 +60,3 @@ volumes:
   redis:
   postgres:
   web:
-  esdata:
