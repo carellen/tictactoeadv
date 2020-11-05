@@ -1,6 +1,6 @@
 FROM ruby:2.6.6-alpine
 
-RUN apk update && apk add build-base git nodejs postgresql-dev postgresql-client --no-cache yarn
+RUN apk update && apk add build-base tzdata git nodejs postgresql-dev postgresql-client --no-cache yarn
 
 # Make busybox and pry work nicely for large output
 ENV PAGER='more'

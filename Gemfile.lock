@@ -197,6 +197,8 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2020.1)
+      tzinfo (>= 1.0.0)
     view_component (2.21.0)
       activesupport (>= 5.0.0, < 7.0)
     view_component_reflex (2.6.0)
