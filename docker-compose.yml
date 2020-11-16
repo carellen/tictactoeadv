@@ -13,7 +13,7 @@ services:
 
   redis:
     image: 'redis:4.0.11-alpine'
-    command: ["redis-server", "--appendonly", "yes"]
+    command: ["redis-server", "--requirepass", "pcEmmV3EN4", "--appendonly", "yes"]
     ports:
       - '6379:6379'
     sysctls:
